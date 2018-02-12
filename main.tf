@@ -1,3 +1,9 @@
+resource "null_resource" "start" {
+  provisioner "local-exec" {
+    command = "echo depends_id=${var.depends_id}"
+  }
+}
+
 locals {
   default_affinities = "${length(var.default_affinities) == 0 ?
     ""
@@ -15,6 +21,8 @@ locals {
 }
 
 resource "null_resource" "kontena_grid_create" {
+  depends_on = ["null_resource.start"]
+
   provisioner "local-exec" {
     command = <<EOF
 kontena grid create \
