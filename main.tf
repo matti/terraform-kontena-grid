@@ -1,43 +1,9 @@
-variable "name" {}
-
-variable "initial_size" {
-  default = 1
-}
-
-variable "token" {
-  default = ""
-}
-
-variable "subnet" {
-  default = ""
-}
-
-variable "supernet" {
-  default = ""
-}
-
-variable "default_affinities" {
-  default = []
-}
-
 locals {
   default_affinities = "${length(var.default_affinities) == 0 ?
     ""
     :
     "${join(" ", formatlist("--default-affinity %s", var.default_affinities))}"
     }"
-}
-
-variable "statsd_server" {
-  default = ""
-}
-
-variable "log_forwarder" {
-  default = ""
-}
-
-variable "log_opts" {
-  default = []
 }
 
 locals {
